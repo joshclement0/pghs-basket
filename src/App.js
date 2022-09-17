@@ -9,15 +9,9 @@ import Players from './pages/players/index'
 import Coaches from './pages/coaches/index'
 import Calendar from './pages/calendar/index'
 
-// function usePageViews() {
-//   let location = useLocation();
-//   useEffect(() => {
-//     // ga.send(["pageview", location.pathname]);
-//   }, [location]);
-// }
+
 function InnerApp() {
   const { pathname, hash, key } = useLocation();
-  // usePageViews()
   useEffect(() => {
     // if not a hash link, scroll to top
     if (hash === '') {
