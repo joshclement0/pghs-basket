@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import { React, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom";
 
-function App() {
+// Local imports
+import Navbar from './Navbar';
+import AdAgency from './components/AddAgency'
+import Home from "./pages/home/index"
+import Players from './pages/players/index'
+import Coaches from './pages/coaches/index'
+import Calendar from './pages/calendar/index'
+
+// function usePageViews() {
+//   let location = useLocation();
+//   useEffect(() => {
+//     // ga.send(["pageview", location.pathname]);
+//   }, [location]);
+// }
+function InnerApp() {
+  const { pathname, hash, key } = useLocation();
+  // usePageViews()
+  useEffect(() => {
+    // if not a hash link, scroll to top
+    if (hash === '') {
+      window.scrollTo(0, 0);
+    }
+    // else scroll to id
+    else {
+      setTimeout(() => {
+        // const id = hash.replace('#', '');
+        const id = hash
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView();
+        }
+      }, 0);
+    }
+  }, [pathname, hash, key]); // do this on r
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Navbar />
+        <div style={{height:'100px'}}></div>
+        <Routes >
+          <Route exact key={0} path="/" element={<Home />} />
+          <Route exact key={1} path="/players" element={<Players />} />
+          <Route exact key={2} path="/coaches" element={<Coaches />} />
+          <Route exact key={3} path="/calendar" element={<Calendar />} />
+          <Route exact key={4} path="/concessions" element={<Home />} />
+          <Route exact key={5} path="/support/team" element={<Home />} />
+          <Route exact key={6} path="/support/sponsors" element={<Home />} />
+        </Routes>
+        <AdAgency />
     </div>
+
   );
+}
+function App(){
+  return(
+    <Router>
+      <InnerApp />
+    </Router>
+  )
 }
 
 export default App;
+

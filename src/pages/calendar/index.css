@@ -1,0 +1,8 @@
+.GamePresent{
+    width: 8px;
+    background: blue;
+    z-index: 999;
+    height: 8px;
+    transform: translate(23px, 0px);
+    border-radius: 4px;
+}
