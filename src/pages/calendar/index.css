@@ -6,3 +6,11 @@
     transform: translate(23px, 0px);
     border-radius: 4px;
 }
+.SponsPresent{
+    width: 8px;
+    background: gold;
+    z-index: 998;
+    height: 8px;
+    transform: translate(24px, 0px);
+    border-radius: 4px;
+}

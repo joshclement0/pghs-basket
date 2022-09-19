@@ -38,14 +38,14 @@ const Navbar = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel>
-                <Box onClick={() => { navigate("/players#varsity") }}>
+                <Box onClick={() => { onClose(); navigate("/players#varsity") }}>
                   <AccordianButton text='Varsity'></AccordianButton>
                 </Box>
-                <Box onClick={() => { navigate("/players#jv") }}>
+                <Box onClick={() => { onClose(); navigate("/players#jv") }}>
                   <AccordianButton text='JV'></AccordianButton>
                 </Box>
-                <Box onClick={() => { navigate("/players#soph") }}>
-                  <AccordianButton text='Sophmore'></AccordianButton>
+                <Box onClick={() => { onClose(); navigate("/players#soph") }}>
+                  <AccordianButton text='Sophomore'></AccordianButton>
                 </Box>
               </AccordionPanel>
             </AccordionItem>
@@ -54,7 +54,7 @@ const Navbar = () => {
             <AccordionItem>
               <h2>
               <AccordionButton>
-              <Box onClick={() => { navigate("/coaches") }}>
+              <Box onClick={() => { onClose(); navigate("/coaches") }}>
                   <DrawerButton text='Coaches' icon={GrGroup}></DrawerButton>
                 </Box>
                 </AccordionButton>
@@ -65,7 +65,7 @@ const Navbar = () => {
             <AccordionItem>
               <h2>
               <AccordionButton>
-              <Box onClick={() => { navigate("/calendar") }}>
+              <Box onClick={() => { onClose(); navigate("/calendar") }}>
                   <DrawerButton text='Calendar' icon={FaCalendar}></DrawerButton>
                 </Box>
                 </AccordionButton>
@@ -76,7 +76,7 @@ const Navbar = () => {
             <AccordionItem>
               <h2>
               <AccordionButton>
-              <Box onClick={() => { navigate("/calendar") }}>
+              <Box onClick={() => { onClose(); navigate("/calendar") }}>
                   <DrawerButton text='Concessions' icon={FaHamburger}></DrawerButton>
                 </Box>
                 </AccordionButton>
@@ -91,10 +91,10 @@ const Navbar = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel>
-                <Box onClick={() => { navigate("/support/team") }}>
+                <Box onClick={() => {onClose(); navigate("/support/team") }}>
                   <AccordianButton text='Team'></AccordianButton>
                 </Box>
-                <Box onClick={() => { navigate("/support/sponsor") }}>
+                <Box onClick={() => {onClose(); navigate("/support/sponsor") }}>
                   <AccordianButton text='Sponsors'></AccordianButton>
                 </Box>
               </AccordionPanel>

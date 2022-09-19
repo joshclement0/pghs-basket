@@ -1,0 +1,26 @@
+[{
+    "name":"Landon Wellman",
+    "number":10,
+    "info":[
+        "Position: Guard",
+        "Height: 5’9”",
+        "Grade: Junior"
+    ]
+},{
+    "name":"Ryan Hadley",
+    "number":20,
+    "info":[
+        "Position: Guard",
+        "Height: 5’11”",
+        "Grade: Sophomore"
+    ]
+},{
+    "name":"Colby Dean",
+    "number":42,
+    "info":[
+        "Position: Center",
+        "Height: 6’8”",
+        "Grade: Junior"
+    ]
+}
+]

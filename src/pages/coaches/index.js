@@ -4,8 +4,7 @@ import Person from '../../components/Person'
 import playerJson from './players.json'
 
 function Players (){
-    return(<div style={{background:'blue',textAlign: 'center',padding:"20px",marginTop:"40px"}}>
-        HEY THIS IS THE MAIN SCREEN
+    return(<div style={{textAlign: 'center',padding:"10px",marginTop:"40px"}}>
         
         <Wrap spacing='30px' justify='center'>
         {playerJson.map((player) => {return ( 

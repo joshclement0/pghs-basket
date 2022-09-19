@@ -32,7 +32,7 @@ function InnerApp() {
   return (
     <div>
         <Navbar />
-        <div style={{height:'100px'}}></div>
+        <div style={{height:'90px'}}></div>
         <Routes >
           <Route exact key={0} path="/" element={<Home />} />
           <Route exact key={1} path="/players" element={<Players />} />
@@ -43,6 +43,7 @@ function InnerApp() {
           <Route exact key={6} path="/support/sponsors" element={<Home />} />
         </Routes>
         <AdAgency />
+        <div style={{height:'120px'}}></div>
     </div>
 
   );

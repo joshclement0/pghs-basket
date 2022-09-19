@@ -1,14 +1,26 @@
 [
     {
         "date":"September 2 2022 7:00 pm",
-        "title":"Varsity Game"
+        "title":"Varsity Game",
+        "info":"vs Brighton",
+        "type": "pghs"
     },
     {
         "date":"September 28 2022 7:00 pm",
-        "title":"JV Game"
+        "title":"JV Game",
+        "info":"@ West Lake",
+        "type":"pghs"
     },
     {
         "date":"September 17 2022 3:30 pm",
-        "title":"Sophmore Game"
+        "title":"Sophmore Game",
+        "info":"vs American Fork - WHITE OUT",
+        "type":"pghs"
+    },
+    {
+        "date":"September 28 2022 12:00 am",
+        "title":"50% off at Fly Chicken Sandwich",
+        "info" : "Show this at your nearest Fly Chicken to recieve your reward",
+        "type":"spon"
     }
 ]
