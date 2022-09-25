@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Box, Flex,  Drawer, DrawerContent, IconButton, useDisclosure } from '@chakra-ui/react'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, Image } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
-import { FaBasketballBall, FaCalendar, FaHamburger, FaTshirt} from 'react-icons/fa'
-import {GrGroup} from 'react-icons/gr'
 
+import { FaCoins, FaCalendar, FaBookOpen, FaTshirt,FaChalkboardTeacher} from 'react-icons/fa'
+// import {GrGroup} from 'react-icons/gr'
+//icons are found at https://react-icons.github.io/react-icons/
 
 // Local imports
 import DrawerButton from './components/DrawerButton';
@@ -55,7 +56,7 @@ const Navbar = () => {
               <h2>
               <AccordionButton>
               <Box onClick={() => { onClose(); navigate("/coaches") }}>
-                  <DrawerButton text='Coaches' icon={GrGroup}></DrawerButton>
+                  <DrawerButton text='Coaches' icon={FaChalkboardTeacher}></DrawerButton>
                 </Box>
                 </AccordionButton>
               </h2>
@@ -72,22 +73,11 @@ const Navbar = () => {
               </h2>
             </AccordionItem>
 
-            {/* Concessions */}
-            <AccordionItem>
-              <h2>
-              <AccordionButton>
-              <Box onClick={() => { onClose(); navigate("/calendar") }}>
-                  <DrawerButton text='Concessions' icon={FaHamburger}></DrawerButton>
-                </Box>
-                </AccordionButton>
-              </h2>
-            </AccordionItem>
-
             {/* Support*/}
             <AccordionItem>
               <h2>
                 <AccordionButton>
-                  <DrawerButton text='Support' icon={FaBasketballBall} ></DrawerButton>
+                  <DrawerButton text='Support' icon={FaCoins} ></DrawerButton>
                 </AccordionButton>
               </h2>
               <AccordionPanel>
@@ -98,6 +88,15 @@ const Navbar = () => {
                   <AccordianButton text='Sponsors'></AccordianButton>
                 </Box>
               </AccordionPanel>
+            </AccordionItem>
+
+            {/* FanGuides*/}
+            <AccordionItem>
+              <AccordionButton>
+              <Box onClick={() => { onClose(); window.location.replace('https://pghs.fanguide.org/'); }}>
+                  <DrawerButton text='Fan Guides' icon={FaBookOpen}></DrawerButton>
+                </Box>
+                </AccordionButton>
             </AccordionItem>
             
           </Accordion>

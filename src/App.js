@@ -8,7 +8,15 @@ import Home from "./pages/home/index"
 import Players from './pages/players/index'
 import Coaches from './pages/coaches/index'
 import Calendar from './pages/calendar/index'
+import Sponsor from './pages/sponsor/index'
 
+function ExternalRedirect(props) {
+  let url = props.url
+  // 👇️ redirect to external URL
+  window.location.replace(url);
+
+  return null;
+}
 
 function InnerApp() {
   const { pathname, hash, key } = useLocation();
@@ -39,8 +47,8 @@ function InnerApp() {
           <Route exact key={2} path="/coaches" element={<Coaches />} />
           <Route exact key={3} path="/calendar" element={<Calendar />} />
           <Route exact key={4} path="/concessions" element={<Home />} />
-          <Route exact key={5} path="/support/team" element={<Home />} />
-          <Route exact key={6} path="/support/sponsors" element={<Home />} />
+          <Route exact key={5} path="/support/team" element={<ExternalRedirect url='https://www.successfund.com/pghsboysbasketball'/>} />
+          <Route exact key={6} path="/support/sponsor" element={<Sponsor />} />
         </Routes>
         <AdAgency />
         <div style={{height:'120px'}}></div>

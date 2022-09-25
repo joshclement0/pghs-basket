@@ -12,10 +12,10 @@ import varsity_team from '../../assets/players/vars_team.jpeg'
 function Players (){
     return(<div style={{textAlign: 'center',padding:"20px"}}>
         <CustomAnchor id="#varsity"> Varsity </CustomAnchor>
-        <img src={varsity_team} alt="Varsity Basketball Team"/>
+        <img src={varsity_team} alt="Varsity Basketball Team" style={{width:'100%'}}/>
         <Wrap spacing='30px' justify='center'>
         {playerJson.map((player) => {return ( 
-            <Person key={Math.random()} src={player.url} name={player.name} info={player.info} num={player.number}/>)})}
+            <Person key={Math.random()} src={require('../../assets/'+player.url)} name={player.name} info={player.info} num={player.number}/>)})}
         </Wrap>
         <CustomAnchor id="#jv"> Junior Varsity </CustomAnchor>
         <Wrap spacing='30px' justify='center'>

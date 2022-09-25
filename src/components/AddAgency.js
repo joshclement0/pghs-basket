@@ -25,9 +25,9 @@ function Ads(){
     
     return(
         <div style={{padding:'18px', position:'fixed',bottom:'0px',left:'10%',borderTop:'2px solid grey',width:'80%',
-            opacity:'.8',height:'120px',background: 'white', borderTopRightRadius: '20px', borderTopLeftRadius:'20px'}}
+            opacity:'.9',height:'120px',background: 'white', borderTopRightRadius: '20px', borderTopLeftRadius:'20px'}}
             onClick={()=>window.location.href =ad.link}>
-            <Image alt={ad.title} src={ad.url} style={{position:'absolute',height:'80%',right:'50%',transform:'translate(50%, -34px)'}} />
+            <Image alt={ad.title} src={ad.url} style={{position:'absolute',height:'80%',right:'50%',transform:'translate(50%, -28px)'}} />
         </div>
     )
 }

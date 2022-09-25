@@ -35,11 +35,9 @@ function add({ date, view }) {
         
     }
 }
-console.log(datesToAddGoldContentTO,datesToAddContentTo)
 function MyCalendar(){
     const [value, onChange] = useState(new Date());
     function handleChange(e){
-        console.log(e)
         onChange(e)
     }
     return (
@@ -47,13 +45,14 @@ function MyCalendar(){
             <div style={{position:'absolute',left:"50%",transform:'translate(-50%,10px)'}}>
             <Calendar  onChange={handleChange} value={value} tileContent={add}/>
             </div>
-            <div style={{position:'absolute',left:"50%",top:'400px',transform:'translate(-50%,10px)',width: '100%',
-                    padding: '10%px'}}>
+            <div style={{position:'absolute',left:"50%",top:'400px',transform:'translate(-50%,10px)',width: '100%'}}>
                 <h1 style={{fontSize:'24px',paddingLeft:'100px'}}>{value.toDateString()}</h1>
-                {games.filter((game) => {if (isSameDay(new Date(game.date),value)){return true} else return false}).map((game)=>{ return (
-                    <CalendarItem {...game}/>
-                )})
-                }
+                <div style={{overflow:"auto",height:'270px'}}>
+                    {games.filter((game) => {if (isSameDay(new Date(game.date),value)){return true} else return false}).map((game)=>{ return (
+                        <CalendarItem key={Math.random()} {...game}/>
+                    )})}
+                    <div style={{height:'105px'}} />
+                </div>
             </div>
         </div>
     );

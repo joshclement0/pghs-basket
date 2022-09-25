@@ -22,5 +22,17 @@
         "title":"50% off at Fly Chicken Sandwich",
         "info" : "Show this at your nearest Fly Chicken to recieve your reward",
         "type":"spon"
+    },
+    {
+        "date":"September 28 2022 12:00 am",
+        "title":"Homecoming Celebration",
+        "info" : "Join us for tailgaiting and lots of fun",
+        "type":"pghs"
+    },
+    {
+        "date":"September 28 2022 11:00 am",
+        "title":"Pep Rally",
+        "info" : "Tons of things that'll make you jump",
+        "type":"pghs"
     }
 ]

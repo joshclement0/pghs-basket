@@ -2,7 +2,7 @@
     {
         "title":"McIff Dental",
         "url":"https://images.squarespace-cdn.com/content/v1/611fe8cc7338f973c3f48046/563295d6-6972-4167-bea7-512c789f3d4f/mciff-logo-web-01.png?format=1000w",
-        "frequency":5,
+        "frequency":1,
         "link":"https://www.dentistpleasantgrove.com/"
     },
     {
@@ -12,9 +12,15 @@
         "link":"http://shirtyourself.com/"
     },
     {
+        "title":"Support PGHS",
+        "url":"https://images.squarespace-cdn.com/content/v1/611fe8cc7338f973c3f48046/e09f279b-9801-43d8-a3b5-9e1f2d9317c6/your+ad+here.png?format=1000w",
+        "frequency":2,
+        "link":"https://www.successfund.com/pghsboysbasketball"
+    },
+    {
         "title":"Murdock Hyundai",
         "url":"https://images.squarespace-cdn.com/content/v1/611fe8cc7338f973c3f48046/84a8e5cf-6a88-4033-8b27-9ee443a2e1c1/MurdockNB.png?format=2500w",
-        "frequency":9,
+        "frequency":4,
         "link":"https://www.murdockhyundailindon.com/"
     }
 ]

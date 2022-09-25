@@ -4,7 +4,6 @@ var MIDNIGHT = new Date();
 MIDNIGHT.setHours(24,0,0,0)
 
 function isAllDay(d){
-    console.log(d.toTimeString(),MIDNIGHT.toTimeString())
     if (d.toTimeString()===MIDNIGHT.toTimeString()) return true
     return false
 }
