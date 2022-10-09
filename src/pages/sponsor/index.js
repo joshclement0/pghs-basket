@@ -1,15 +1,28 @@
-import React from "react";
+import {React,useEffect,useState,useContext} from "react";
 import { Box,Wrap } from "@chakra-ui/react";
 
 import SimpleAdd from "../../components/SimpleAdd";
 import CustomAnchor from "../../components/CustomAnchor";
-import allAds from '../../assets/ads.json'
-
-let platinumAds = allAds.filter(a=>a.frequency===4)
-let goldAds = allAds.filter(a=>a.frequency===2)
-let silverAds = allAds.filter(a=>a.frequency===1)
+import { useParams } from "react-router-dom";
+import routeContext from "../util/routecontext";
+import { getData } from "../util/firbaseconfig";
 
 function SponsorPage(){
+    const [platinumAds, setPlatinum] = useState([]);
+    const [goldAds, setGold] = useState([]);
+    const [silverAds, setSilver] = useState([]);
+    const sport = useParams("sport").sport
+    const { setSport } = useContext(routeContext)
+    setSport(sport)
+    useEffect(() => {
+        const fetchData = async () => {
+            let allAds = await getData("pghs/"+sport+"/ads")
+            setPlatinum(allAds.filter(a=>a.frequency===4))
+            setGold(allAds.filter(a=>a.frequency===2))
+            setSilver(allAds.filter(a=>a.frequency===1))
+        }
+        fetchData()
+      }, [sport]);
     return(
         <Wrap spacing='30px' justify='center'>
             <CustomAnchor id="#plat" style={{textAlign:'center'}}>Platinum Sponsors</CustomAnchor>

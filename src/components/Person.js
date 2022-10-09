@@ -1,6 +1,7 @@
 import { Image,Box,Text} from '@chakra-ui/react'
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import {getImageURL} from '../pages/util/firbaseconfig'
+import defaultImage from "../assets/boys_bball/default.png"
 const styles = {
     text: {
         textShadow:"1px 1px 1px white",
@@ -25,24 +26,36 @@ const styles = {
         background: 'linear-gradient(72deg, rgba(2,0,36,1) 0%, rgba(33,35,254,1) 73%, rgba(255,194,0,1) 100%)'
     }
 }
-
+// const defaultImage = require("../assets/boys_bball/default.png")
 function Person(props){
     let[ isOpen, setOpen] = useState(false);
-    let imageSrc  = props.src
+    let [imageSrc, setImageSrc] = useState()
     let infoArray = props.info
     let name      = props.name
     let playernum = props.num??false
+    let incsource = props.src
+    let [isLoaded, setLoaded] = useState(false)
+
+    useEffect(()=>{
+        async function getImage(){
+            let img = await getImageURL(incsource)
+            setImageSrc(img)
+        }
+        getImage()
+    },[incsource])
+    let radialStyle = isOpen?{}:{background:'radial-gradient(ellipse at 50% 50%, rgba(229, 227, 230, 0.93) 10%, rgba(255, 255, 255, 0) 65%)'}
     return (
-            <Box onClick={()=>setOpen(!isOpen)} style={{position:'relative',textAlign: 'center', borderRadius:'8px',maxWidth:"600px",minWidth:'300px',margin:'32px'}}>
+            <Box onClick={()=>setOpen(!isOpen)} style={{position:'relative',textAlign: 'center', borderRadius:'8px',maxWidth:"500px",minWidth:'300px',margin:'32px',minHeight:'100px'}}>
                 {playernum?<div style={{...styles.number,opacity:isOpen?.3:1}}>{playernum}</div>:''}
-                <Image src={imageSrc} alt={name} style={{width:'100%',opacity:isOpen?.35:1}}/>
+                <Image src={defaultImage} style={{width:'100%',opacity:isOpen?.35:1, display:isLoaded?'none':''}}/>
+                <Image src={imageSrc} alt={name} onLoad={()=>setLoaded(true)} style={{width:'100%',opacity:isOpen?.35:1,display:isLoaded?'':'none'}}/>
                 <div style={{fontSize:'3vh',position: 'absolute',bottom: isOpen?'100%':0,left:'50%',
-                        transform: isOpen?"translate(-50%, 100px)":"translate(-50%, -20px)",width:"100%",...styles.text}}>
+                        transform: isOpen?"translate(-50%, 100px)":"translate(-50%, -20px)",width:"100%",...styles.text,...radialStyle}}>
                     {name}
                 </div>
                 {isOpen ? <div key={Math.random()}style={{position:'absolute',bottom:'0px',left:'50%',transform:"translate(-50%,0)",
                                 width:'100%',minWidth:'200px',fontSize:'1.5vh',padding:'24px',overflow: 'auto', maxHeight:'75%',...styles.text}}>
-                            {infoArray.map((inf)=>(<Text paddingBottom='10px'>{inf}</Text>))}
+                            {infoArray.map((inf)=>(<Text key={Math.random()} paddingBottom='10px'>{inf}</Text>))}
                         </div>
                     : ''}
             </Box>

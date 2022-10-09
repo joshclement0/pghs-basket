@@ -1,5 +1,5 @@
-import React from 'react'
-import AccordianButton from './components/AccordianButton';
+import React, { useContext } from 'react'
+import AccordianButton from '../../components/AccordianButton';
 import { useNavigate } from "react-router-dom";
 import { Box, Flex,  Drawer, DrawerContent, IconButton, useDisclosure } from '@chakra-ui/react'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, Image } from '@chakra-ui/react'
@@ -10,20 +10,21 @@ import { FaCoins, FaCalendar, FaBookOpen, FaTshirt,FaChalkboardTeacher} from 're
 //icons are found at https://react-icons.github.io/react-icons/
 
 // Local imports
-import DrawerButton from './components/DrawerButton';
+import DrawerButton from '../../components/DrawerButton';
+import routeContext from './routecontext';
 
 const Navbar = () => {
-  let logo = require('./assets/vikinghead.png')
+  let logo = require('../../assets/vikinghead.png')
   let navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { sport} = useContext(routeContext)
   return (
     <Flex backgroundColor='white' h='10vh' align='center' borderWidth={2} direction='row' p={4} width='100%' position='fixed' top='0px' style={{zIndex:1000}}><>
       
-      <Box p={10} pl={0} maxWidth='300px' padding={0} onClick={() => { navigate("") }}>
+      <Box p={10} pl={0} maxWidth='300px' padding={0} onClick={() => { sport?navigate("/"+sport):navigate("") }}>
         <Image src={logo} height='8vh'></Image>
       </Box>
-      <IconButton _hover={{ bg: "gray.50", }} backgroundColor='transparent' color='gray.500' icon={<HamburgerIcon />} onClick={onOpen} style={{position:'absolute', right:'18px'}}>Open Drawer</IconButton>
+      <IconButton _hover={{ bg: "gray.50", }} backgroundColor='transparent' color='gray.500' icon={<HamburgerIcon />} onClick={sport?onOpen:()=>{}} style={{position:'absolute', right:'18px'}}>Open Drawer</IconButton>
       <Drawer placement='right' onClose={onClose} isOpen={isOpen} size='xs'>
         <DrawerContent  borderRight='solid' borderColor='gray.200' borderRightWidth={5} >
         <Box p={6} onClick={() => { onClose(); navigate("") }} >
@@ -39,13 +40,13 @@ const Navbar = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel>
-                <Box onClick={() => { onClose(); navigate("/players#varsity") }}>
+                <Box onClick={() => { onClose(); navigate("/"+sport+"/players#varsity") }}>
                   <AccordianButton text='Varsity'></AccordianButton>
                 </Box>
-                <Box onClick={() => { onClose(); navigate("/players#jv") }}>
+                <Box onClick={() => { onClose(); navigate("/"+sport+"/players#jv") }}>
                   <AccordianButton text='JV'></AccordianButton>
                 </Box>
-                <Box onClick={() => { onClose(); navigate("/players#soph") }}>
+                <Box onClick={() => { onClose(); navigate("/"+sport+"/players#soph") }}>
                   <AccordianButton text='Sophomore'></AccordianButton>
                 </Box>
               </AccordionPanel>
@@ -55,18 +56,27 @@ const Navbar = () => {
             <AccordionItem>
               <h2>
               <AccordionButton>
-              <Box onClick={() => { onClose(); navigate("/coaches") }}>
-                  <DrawerButton text='Coaches' icon={FaChalkboardTeacher}></DrawerButton>
-                </Box>
-                </AccordionButton>
+                <DrawerButton text='Coaches' icon={FaChalkboardTeacher}></DrawerButton>
+              </AccordionButton>
               </h2>
+              <AccordionPanel>
+                <Box onClick={() => { onClose(); navigate("/"+sport+"/coaches#varsity") }}>
+                  <AccordianButton text='Varsity'></AccordianButton>
+                </Box>
+                <Box onClick={() => { onClose(); navigate("/"+sport+"/coaches#jv") }}>
+                  <AccordianButton text='JV'></AccordianButton>
+                </Box>
+                <Box onClick={() => { onClose(); navigate("/"+sport+"/coaches#soph") }}>
+                  <AccordianButton text='Sophomore'></AccordianButton>
+                </Box>
+              </AccordionPanel>
             </AccordionItem>
 
             {/* Calendar */}
             <AccordionItem>
               <h2>
               <AccordionButton>
-              <Box onClick={() => { onClose(); navigate("/calendar") }}>
+              <Box onClick={() => { onClose(); navigate("/"+sport+"/calendar") }}>
                   <DrawerButton text='Calendar' icon={FaCalendar}></DrawerButton>
                 </Box>
                 </AccordionButton>
@@ -81,10 +91,10 @@ const Navbar = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel>
-                <Box onClick={() => {onClose(); navigate("/support/team") }}>
+                <Box onClick={() => {onClose(); navigate("/"+sport+"/support/team") }}>
                   <AccordianButton text='Team'></AccordianButton>
                 </Box>
-                <Box onClick={() => {onClose(); navigate("/support/sponsor") }}>
+                <Box onClick={() => {onClose(); navigate("/"+sport+"/support/sponsor") }}>
                   <AccordianButton text='Sponsors'></AccordianButton>
                 </Box>
               </AccordionPanel>
@@ -93,10 +103,10 @@ const Navbar = () => {
             {/* FanGuides*/}
             <AccordionItem>
               <AccordionButton>
-              <Box onClick={() => { onClose(); window.location.replace('https://pghs.fanguide.org/'); }}>
+                <Box onClick={() => { onClose(); navigate(""); }}>
                   <DrawerButton text='Fan Guides' icon={FaBookOpen}></DrawerButton>
                 </Box>
-                </AccordionButton>
+              </AccordionButton>
             </AccordionItem>
             
           </Accordion>
