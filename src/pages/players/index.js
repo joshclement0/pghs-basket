@@ -5,47 +5,55 @@ import CustomAnchor from '../../components/CustomAnchor'
 import { useParams } from "react-router-dom";
 import routeContext from "../util/routecontext";
 import {getImageURL,getData} from '../util/firbaseconfig'
+import {useQuery} from '@tanstack/react-query'
 
 function Players (props){
-    const [teamImages, setImages] = useState(['','',''])
     const [playerJson, setVarsity] = useState([]);
     const [jv_playerJson, setJV] = useState([]);
     const [soph_playerJson, setSoph] = useState([]);
     const sport = useParams("sport").sport
     const { setSport } = useContext(routeContext)
+    const allPlayerJson = useQuery(["pghs", sport, "players"], () => getData("pghs/"+sport+"/players"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    
+    const varsImage = useQuery([sport, "players", 'vars_team.jpeg'], ()=>getImageURL(sport+'/players/vars_team.jpeg'))
+    const jvImage = useQuery([sport, "players", 'jv_team.jpeg'], ()=>getImageURL(sport+'/players/junior_team.jpeg'))
+    const sophImage = useQuery([sport, "players", 'soph_team.jpeg'], ()=>getImageURL(sport+'/players/soph_team.jpeg'))
     let hash = props.hash
+    
     setSport(sport)
     useEffect(() => {
-        const fetchData = async () => {
-            let importAll = await getData("pghs/"+sport+"/players")
-            setVarsity(importAll.varsity??{})
-            setJV(importAll.jv??{})
-            setSoph(importAll.soph??{})
-
-            let varsImgUrl = await getImageURL(sport+'/players/vars_team.jpeg')
-            let juniorImgUrl = await getImageURL(sport+'/players/junior_team.jpeg')
-            let sophImgUrl = await getImageURL(sport+'/players/soph_team.jpeg')
-            setImages([varsImgUrl,juniorImgUrl,sophImgUrl])
-            setTimeout(() => {
-                // const id = hash.replace('#', '');
-                const id = hash
-                const element = document.getElementById(id);
-                if (element) {
-                  element.scrollIntoView();
-                }
-              }, 1500);
+        setTimeout(() => {
+            // const id = hash.replace('#', '');
+            const id = hash
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView();
+            }
+        }, 1500);
+    }, [hash]);
+    useEffect(()=>{
+        if (allPlayerJson.isFetched){
+            setVarsity(allPlayerJson.data.varsity ?? {})
+            setJV(allPlayerJson.data.jv ?? {})
+            setSoph(allPlayerJson.data.soph ?? {})
         }
-        fetchData()
-      }, []);
+    },[allPlayerJson.isFetched,allPlayerJson.data])
     return(<div style={{textAlign: 'center',padding:"20px"}}>
         <CustomAnchor id="#varsity"> Varsity </CustomAnchor>
-        <img src={teamImages[0]} alt="Varsity Basketball Team" style={{width:'100%',marginTop:'8px',marginBottom:'8px'}}/>
+        {varsImage.isLoading? '':
+            <img src={varsImage.data} alt="Varsity Basketball Team" style={{width:'100%',marginTop:'8px',marginBottom:'8px',maxWidth:'700px',marginRight:"auto",marginLeft: 'auto'}}/>
+        }
         <Wrap spacing='30px' justify='center'>
         {playerJson.map((player) => {return ( 
             <Person key={Math.random()} src={sport+'/players/'+player.url} name={player.name} info={player.info} num={player.number}/>)})}
         </Wrap>
+        <br />
+        <br />
         <CustomAnchor id="#jv"> Junior Varsity </CustomAnchor>
-        <img src={teamImages[1]} alt="Junior Varsity Basketball Team" style={{width:'100%',marginTop:'8px',marginBottom:'8px'}}/>
+        <br />
+        {jvImage.isLoading || jvImage.isError ? '':
+            <img src={jvImage.data} alt="Junior Varsity Basketball Team" style={{width:'100%',marginTop:'8px',marginBottom:'8px',maxWidth:'700px',marginRight:"auto",marginLeft: 'auto'}}/>
+        }
         <Wrap spacing='30px' justify='center'>
         {jv_playerJson.map((player)=>(
             <div key={Math.random()} style={{position:'relative'}}>
@@ -55,8 +63,13 @@ function Players (props){
             </div>
         ))}
         </Wrap>
+        <br />
+        <br />
         <CustomAnchor id="#soph"> Sophomore </CustomAnchor>
-        <img src={teamImages[2]} alt="Sophmore Basketball Team" style={{width:'100%',marginTop:'8px',marginBottom:'8px'}}/>
+        <br/>
+        {sophImage.isLoading || sophImage.isError? '':
+            <img src={sophImage.data} alt="Sophmore Basketball Team" style={{width:'100%',marginTop:'8px',marginBottom:'8px',maxWidth:'700px',marginRight:"auto",marginLeft: 'auto'}}/>
+        }
         <Wrap spacing='30px' justify='center'>
         {soph_playerJson.map((player)=>(
             <div key={Math.random()} style={{position:'relative'}}>

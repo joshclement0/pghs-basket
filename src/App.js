@@ -1,19 +1,25 @@
 import { React, useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // Local imports
 import Navbar from './pages/util/Navbar';
 import AdAgency from './pages/util/AddAgency'
-import Home from "./pages/home/index"
-import Players from './pages/players/index'
-import Coaches from './pages/coaches/index'
-import Calendar from './pages/calendar/index'
-import Sponsor from './pages/sponsor/index'
-import Donate from './pages/donate/index'
+import Home from "./pages/home"
+import Players from './pages/players'
+import Coaches from './pages/coaches'
+import Calendar from './pages/calendar'
+import Sponsor from './pages/sponsor'
+import Donate from './pages/donate'
 import MainHome from './pages/util/home';
-import Highlights from './pages/highlights/index'
+import Highlights from './pages/highlights'
 
 import routeContext from './pages/util/routecontext';
+const queryClient = new QueryClient()
 
 function InnerApp() {
   const { pathname, hash, key } = useLocation();
@@ -40,6 +46,7 @@ function InnerApp() {
   }, [pathname, hash, key]); // do this on r
   return (
     <routeContext.Provider value={value}>
+      <QueryClientProvider client={queryClient}>
         <Navbar />
         <div style={{height:'90px'}}></div>
         <Routes >
@@ -51,10 +58,12 @@ function InnerApp() {
           <Route exact key={5} path="/:sport/concessions" element={<Home />} />
           <Route exact key={6} path="/:sport/support/team" element={<Donate />} />
           <Route exact key={7} path="/:sport/support/sponsor" element={<Sponsor />} />
-          <Route exact key={8} path="/:sport/highlights" element={<Highlights />} />
+          <Route exact key={8} path="/:sport/highlight" element={<Highlights />} />
         </Routes>
         <AdAgency/>
         <div style={{height:'120px'}}></div>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      </QueryClientProvider>
     </routeContext.Provider>
 
   );

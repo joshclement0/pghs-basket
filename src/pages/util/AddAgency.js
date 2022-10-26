@@ -1,5 +1,6 @@
 import {React, useEffect,useState,useContext} from "react";
 import { Image } from "@chakra-ui/react";
+import {useQuery} from '@tanstack/react-query'
 
 import routeContext from './routecontext';
 import { getData } from "./firbaseconfig";
@@ -10,6 +11,7 @@ function Ads(){
     const { sport } = useContext(routeContext)
     let [ads, setAds]=useState([])
     let [visible,setVisible] = useState([])
+    const adquery = useQuery(["pghs", sport, "ads"], () => getData("pghs/"+sport+"/ads"),{staleTime: 1.8e+6,cacheTime:Infinity})
 
     function getRandom(){
         let frequency=ads.map(a=>a.frequency)
@@ -25,17 +27,10 @@ function Ads(){
         setVisible(visibleTemp)
     }
     useEffect(() => {
-        const fetchData = async () => {
-            let importads = await getData("pghs/"+sport+'/ads')
-            if (!importads){
-                setAds([])
-                return
-            }
-            setAds(importads)
-            getRandom()
+        if (adquery.isFetched && adquery.data){
+            setAds(adquery.data)
         }
-        fetchData()
-      }, [sport]);
+      }, [adquery]);
     useEffect(()=>{
         let interval = setInterval(getRandom,5000)
         return ()=>clearInterval(interval)

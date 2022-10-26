@@ -6,6 +6,7 @@ import SimpleField from "../../components/SimpleField"
 import CustomAnchor from "../../components/CustomAnchor";
 import routeContext from "../util/routecontext";
 import { getData } from "../util/firbaseconfig";
+import { useQuery } from "@tanstack/react-query";
 
 const defaultFields = [
     {
@@ -40,19 +41,18 @@ function Home(){
     const { setSport } = useContext(routeContext)
     const [fields, setFields] = useState(defaultFields)
     const [name, setName] = useState("PGHS BOYS BASKETBALL")
+    setSport(sport)
+
+    const importdata = useQuery(["pghs", sport, "config"], () => getData("pghs/"+sport+"/config"),{staleTime: 1.8e+6,cacheTime:Infinity})
     useEffect(()=>{
-        setSport(sport)
-        async function fetchData(){
-            let importdata = await getData("pghs/"+sport+"/config")
-            setFields(importdata.fields??defaultFields)
-            setName(importdata.name??"PGHS BOYS BASKETBALL")
-        } 
-        fetchData()
-    },[])
-    
+        if (importdata.isFetched && importdata.data){
+          setFields(importdata.data.fields??defaultFields)
+          setName(importdata.data.name ?? "PGHS BOYS BASKETBALL")
+        }
+    },[importdata.isFetched,importdata.data])
     return(
         <div>
-            <CustomAnchor id='#head' style={{textAlign:'center'}}>{name}</CustomAnchor>
+            <CustomAnchor id='#head' >{name}</CustomAnchor>
             <Wrap spacing='30px' justify='center'>
                 {fields.map((field) => {return (
                     <Box key={Math.random()} onClick={() => { navigate('/'+sport+field.route) }}>

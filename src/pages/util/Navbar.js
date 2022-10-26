@@ -5,7 +5,7 @@ import { Box, Flex,  Drawer, DrawerContent, IconButton, useDisclosure } from '@c
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, Image } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 
-import { FaCoins, FaCalendar, FaBookOpen, FaTshirt,FaChalkboardTeacher} from 'react-icons/fa'
+import { FaCoins, FaCalendar, FaBookOpen, FaTshirt,FaChalkboardTeacher,FaRegImage} from 'react-icons/fa'
 // import {GrGroup} from 'react-icons/gr'
 //icons are found at https://react-icons.github.io/react-icons/
 
@@ -78,6 +78,17 @@ const Navbar = () => {
               <AccordionButton>
               <Box onClick={() => { onClose(); navigate("/"+sport+"/calendar") }}>
                   <DrawerButton text='Calendar' icon={FaCalendar}></DrawerButton>
+                </Box>
+                </AccordionButton>
+              </h2>
+            </AccordionItem>
+
+            {/* Highlights */}
+            <AccordionItem>
+              <h2>
+              <AccordionButton>
+              <Box onClick={() => { onClose(); navigate("/"+sport+"/highlight") }}>
+                  <DrawerButton text='Highlight' icon={FaRegImage}></DrawerButton>
                 </Box>
                 </AccordionButton>
               </h2>

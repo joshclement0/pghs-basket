@@ -8,6 +8,7 @@ import CalendarItem from "../../components/CalendarItem";
 import { useParams } from "react-router-dom";
 import routeContext from "../util/routecontext";
 import { getData } from "../util/firbaseconfig";
+import { useQuery } from "@tanstack/react-query";
 
 let datesToAddContentTo = []
 let datesToAddGoldContentTO= []
@@ -26,16 +27,18 @@ function MyCalendar(){
     const sport = useParams("sport").sport
     const { setSport } = useContext(routeContext)
     setSport(sport)
+
+    const importgames = useQuery(["pghs",sport,"calendar"], ()=>getData("pghs/"+sport+"/calendar"),{staleTime: 1.8e+6,cacheTime:Infinity})
     useEffect(() => {
-        const fetchData = async () => {
-            let importgames = await getData("pghs/"+sport+"/calendar")
-            setGames(importgames)
-            datesToAddContentTo = importgames.filter(g=>g.type==='pghs').map(g=>new Date(g.date));
-            datesToAddGoldContentTO= importgames.filter(g=>g.type==='spon').map(g=>new Date(g.date))
+        if (importgames.isFetched){
+            let allgames = importgames.data
+            setGames(allgames)
+            datesToAddContentTo = allgames.filter(g=>g.type==='pghs').map(g=>new Date(g.date));
+            datesToAddGoldContentTO= allgames.filter(g=>g.type==='spon').map(g=>new Date(g.date))
             onChange(new Date())
         }
-        fetchData()
-      }, []);
+    }, [importgames.isFetched,importgames.data]);
+      
     function add({ date, view }) {
         // Add class to tiles in month view only
         if (view === 'month') {

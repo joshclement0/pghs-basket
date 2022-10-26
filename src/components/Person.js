@@ -1,7 +1,8 @@
 import { Image,Box,Text} from '@chakra-ui/react'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {getImageURL} from '../pages/util/firbaseconfig'
-import defaultImage from "../assets/boys_bball/default.png"
+import {useQuery} from '@tanstack/react-query'
+import defaultImage from "../assets/boys_bball/default.svg"
 const styles = {
     text: {
         textShadow:"1px 1px 1px white",
@@ -29,26 +30,20 @@ const styles = {
 // const defaultImage = require("../assets/boys_bball/default.png")
 function Person(props){
     let[ isOpen, setOpen] = useState(false);
-    let [imageSrc, setImageSrc] = useState()
     let infoArray = props.info
     let name      = props.name
     let playernum = props.num??false
     let incsource = props.src
-    let [isLoaded, setLoaded] = useState(false)
 
-    useEffect(()=>{
-        async function getImage(){
-            let img = await getImageURL(incsource)
-            setImageSrc(img)
-        }
-        getImage()
-    },[incsource])
+    const {isLoading,data} = useQuery([incsource], () => getImageURL(incsource),{staleTime: 1.8e+6,cacheTime:Infinity})
+
     let radialStyle = isOpen?{}:{background:'radial-gradient(ellipse at 50% 50%, rgba(229, 227, 230, 0.93) 10%, rgba(255, 255, 255, 0) 65%)'}
     return (
             <Box onClick={()=>setOpen(!isOpen)} style={{position:'relative',textAlign: 'center', borderRadius:'8px',maxWidth:"500px",minWidth:'300px',margin:'32px',minHeight:'100px'}}>
                 {playernum?<div style={{...styles.number,opacity:isOpen?.3:1}}>{playernum}</div>:''}
-                <Image src={defaultImage} style={{width:'100%',opacity:isOpen?.35:1, display:isLoaded?'none':''}}/>
-                <Image src={imageSrc} alt={name} onLoad={()=>setLoaded(true)} style={{width:'100%',opacity:isOpen?.35:1,display:isLoaded?'':'none'}}/>
+                {isLoading?
+                <Image src={defaultImage} style={{width:'100%',opacity:isOpen?.35:1}}/>:
+                <Image src={data} alt={name} style={{width:'100%',opacity:isOpen?.35:1}}/>}
                 <div style={{fontSize:'3vh',position: 'absolute',bottom: isOpen?'100%':0,left:'50%',
                         transform: isOpen?"translate(-50%, 100px)":"translate(-50%, -20px)",width:"100%",...styles.text,...radialStyle}}>
                     {name}
