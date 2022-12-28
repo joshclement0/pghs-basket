@@ -19,7 +19,6 @@ const styles = {
         left:'72%',
         fontSize:'72px',
         fontWeight:800,
-        zIndex:'-1',
         border:'1px solid blue',
         borderRadius:'50%',
         height:'100px',

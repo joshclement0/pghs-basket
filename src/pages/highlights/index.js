@@ -24,7 +24,7 @@ function Page(){
         <Wrap spacing='30px' justify='center'>
             <CustomAnchor id="#camp" >Highlights</CustomAnchor>
             {donateLinks.map((image)=>{ return(
-                <SimpleField name={image.title} db={true} image={image.url} show={true} textstyle={{fontSize:'24px'}} style={{borderRadius:"16px"}}/>
+                <SimpleField name={image.title} db={true} image={image.url} show={true} textstyle={{fontSize:'24px'}} style={{borderRadius:"16px"}} imgstyle={{opacity:1}}/>
             )})}
         </Wrap>
     )
