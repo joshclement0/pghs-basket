@@ -13,11 +13,15 @@ function MainHome(){
     let fields = {
         'Boys Basketball':{
             "route":"/boys_bball",
-            "image":"https://phantom-marca.unidadeditorial.es/dce0ca951a7712498c1f48ff58591c91/resize/1200/f/jpg/assets/multimedia/imagenes/2021/11/27/16380165558995.jpg"
+            "image":"./boys_bball.jpeg"
         },      
         'Girls Basketball':{
             "route":"/girls_bball",
-            "image":"https://thespun.com/.image/t_share/MTg5MjAwOTU1MjM5MTgwMTc5/aac-basketball-tournament---quarterfinals---tulsa-v-smu.jpg",
+            "image":"./girls_bball.jpeg",
+        },
+        'Boys Lacrosse':{
+            "route":"/boys_lax",
+            "image":"./boys_lax.jpeg",
         },
     }
 
@@ -27,7 +31,7 @@ function MainHome(){
             <Wrap spacing='30px' justify='center'>
                 {Object.keys(fields).map((field) => {return (
                     <Box key={Math.random()} onClick={() => { navigate(fields[field]["route"]) }}>
-                        <SimpleField name={field} image={fields[field]['image']}/>
+                        <SimpleField name={field} image={fields[field]['image']} imgstyle={{height:'200px',width:"300px"}}/>
                     </Box>)})
                 }
             </Wrap>
