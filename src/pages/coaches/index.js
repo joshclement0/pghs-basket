@@ -48,12 +48,14 @@ function CoachesPage (props){
             <Person key={Math.random()} src={sport+'/coaches/'+player.url} name={player.name} info={player.info}/>
         ))}
         </Wrap>
-        <CustomAnchor id="#soph"> Sophomore </CustomAnchor>
-        <Wrap spacing='30px' justify='center'>
-        {sophCoachJson.map((player)=>(
-            <Person key={Math.random()} src={sport+'/coaches/'+player.url} name={player.name} info={player.info}/>
-        ))}
-        </Wrap>
+        { sophCoachJson && <>
+            <CustomAnchor id="#soph"> Sophomore </CustomAnchor>
+            <Wrap spacing='30px' justify='center'>
+            {sophCoachJson.map((player)=>(
+                <Person key={Math.random()} src={sport+'/coaches/'+player.url} name={player.name} info={player.info}/>
+            ))}
+            </Wrap>
+        </>}
         
     </div>)
 }

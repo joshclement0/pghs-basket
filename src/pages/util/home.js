@@ -19,10 +19,14 @@ function MainHome(){
             "route":"/girls_bball",
             "image":"./girls_bball.jpeg",
         },
-        'Boys Lacrosse':{
-            "route":"/boys_lax",
-            "image":"./boys_lax.jpeg",
+        'Boys Soccer':{
+            "route":"/boys_soc",
+            "image":"./girls_soc.jpg",
         },
+        'Wrestling':{
+            "route":"wrestling",
+            "image":"./wrestling.jpg",
+        }
     }
 
     return (

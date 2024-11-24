@@ -31,7 +31,7 @@ function Person(props){
     let[ isOpen, setOpen] = useState(false);
     let infoArray = props.info
     let name      = props.name
-    let playernum = props.num??false
+    let playernum = props.num??-1
     let incsource = props.src
 
     const {isLoading,data} = useQuery([incsource], () => getImageURL(incsource),{staleTime: 1.8e+6,cacheTime:Infinity})
@@ -39,7 +39,7 @@ function Person(props){
     let radialStyle = isOpen?{}:{background:'radial-gradient(ellipse at 50% 50%, rgba(229, 227, 230, 0.93) 10%, rgba(255, 255, 255, 0) 65%)'}
     return (
             <Box onClick={()=>setOpen(!isOpen)} style={{position:'relative',textAlign: 'center', borderRadius:'8px',maxWidth:"500px",minWidth:'300px',margin:'32px',minHeight:'100px'}}>
-                {playernum?<div style={{...styles.number,opacity:isOpen?.3:1}}>{playernum}</div>:''}
+                {playernum >= 0 && <div style={{...styles.number,opacity:isOpen?.3:1}}>{playernum}</div>}
                 {isLoading?
                 <Image src={defaultImage} style={{width:'100%',opacity:isOpen?.35:1}}/>:
                 <Image src={data} alt={name} style={{width:'100%',opacity:isOpen?.35:1}}/>}
