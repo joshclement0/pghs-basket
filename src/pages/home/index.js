@@ -40,14 +40,14 @@ function Home(){
     const sport = useParams("sport").sport
     const { setSport } = useContext(routeContext)
     const [fields, setFields] = useState(defaultFields)
-    const [name, setName] = useState("PGHS BOYS BASKETBALL")
+    const [name, setName] = useState("BOYS BASKETBALL")
     setSport(sport)
 
-    const importdata = useQuery(["pghs", sport, "config"], () => getData("pghs/"+sport+"/config"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const importdata = useQuery([ sport, "config"], () => getData(`${process.env.REACT_APP_TAG}/${sport}/config`),{staleTime: 1.8e+6,cacheTime:Infinity})
     useEffect(()=>{
         if (importdata.isFetched && importdata.data){
           setFields(importdata.data.fields??defaultFields)
-          setName(importdata.data.name ?? "PGHS BOYS BASKETBALL")
+          setName(importdata.data.name ?? "BOYS BASKETBALL")
         }
     },[importdata.isFetched,importdata.data])
     return(

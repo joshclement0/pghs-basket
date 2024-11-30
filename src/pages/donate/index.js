@@ -14,7 +14,7 @@ function SponsorPage(){
     const { setSport } = useContext(routeContext)
     setSport(sport)
     
-    const allLinks = useQuery(["pghs",sport,"donate"], ()=>getData("pghs/"+sport+"/donate"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const allLinks = useQuery([sport,"donate"], ()=>getData(`${process.env.REACT_APP_TAG}/${sport}/donate`),{staleTime: 1.8e+6,cacheTime:Infinity})
     useEffect(() => {
         if (allLinks.isFetched){
             setLinks(allLinks.data)

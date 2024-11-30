@@ -17,7 +17,7 @@ function CoachesPage (props){
     const { setSport } = useContext(routeContext)
     let hash = props.hash
     setSport(sport)
-    const allCoachesJson = useQuery(["pghs", sport, "coaches"], () => getData("pghs/"+sport+"/coaches"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const allCoachesJson = useQuery([ sport, "coaches"], () => getData(`${process.env.REACT_APP_TAG}/${sport}/coaches`),{staleTime: 1.8e+6,cacheTime:Infinity})
 
     useEffect(() => {
         setTimeout(() => {

@@ -6,17 +6,16 @@ import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-
 const firebaseConfig = {
-    apiKey: "AIzaSyB1tQXkBOH5IR7R5bxYNBMy4Id3uG6A5Wo",
-    authDomain: "pghs-guide.firebaseapp.com",
-    databaseURL: "https://pghs-guide-default-rtdb.firebaseio.com",
-    projectId: "pghs-guide",
-    storageBucket: "pghs-guide.appspot.com",
-    messagingSenderId: "267578978028",
-    appId: "1:267578978028:web:f28077d3956667a2353fc9",
-    measurementId: "G-RS2N8K81E0"
-  };
+    apiKey: process.env.REACT_APP_DATABASE_API_KEY,
+    authDomain: process.env.REACT_APP_DATABASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_DATABASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_DATABASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_DATABASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_DATABASE_APP_ID,
+    measurementId: process.env.REACT_APP_DATABASE_MEASUREMENT_ID
+  }
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -35,7 +34,13 @@ export async function getData(filepath){
     }
 }
 export async function getImageURL(filepath){
-    let url = await getDownloadURL(storeRef(storage,filepath))
+    let url
+    if (filepath.includes('http')){
+        url = filepath
+    }
+    else {
+        url = await getDownloadURL(storeRef(storage,filepath))
+    }
     return url
 }
 

@@ -11,7 +11,7 @@ function Ads(){
     const { sport } = useContext(routeContext)
     let [ads, setAds]=useState([])
     let [visible,setVisible] = useState([])
-    const adquery = useQuery(["pghs", sport, "ads"], () => getData("pghs/"+sport+"/ads"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const adquery = useQuery([sport, "ads"], () => getData(`${process.env.REACT_APP_TAG}/${sport}/ads`),{staleTime: 1.8e+6,cacheTime:Infinity})
 
     function getRandom(){
         let frequency=ads.map(a=>a.frequency)

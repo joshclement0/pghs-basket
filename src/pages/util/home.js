@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate} from "react-router-dom";
 import { Wrap, Box } from "@chakra-ui/react"
+import { getImageURL, getData } from './firbaseconfig'
+import { useQuery } from '@tanstack/react-query'
 
 import routeContext from "./routecontext";
 import SimpleField from "../../components/SimpleField"
@@ -10,32 +12,18 @@ function MainHome(){
     let navigate = useNavigate();
     const { setSport } = useContext(routeContext)
     setSport('')
-    let fields = {
-        'Boys Basketball':{
-            "route":"/boys_bball",
-            "image":"./boys_bball.jpeg"
-        },      
-        'Girls Basketball':{
-            "route":"/girls_bball",
-            "image":"./girls_bball.jpeg",
-        },
-        'Boys Soccer':{
-            "route":"/boys_soc",
-            "image":"./girls_soc.jpg",
-        },
-        'Wrestling':{
-            "route":"wrestling",
-            "image":"./wrestling.jpg",
-        }
-    }
-
+    const {isFetched, data} = useQuery(
+        [ "config"],
+        () => getData(`${process.env.REACT_APP_TAG}/config`),
+        {staleTime: 1,cacheTime:0}
+      )
     return (
         <div>
-            <CustomAnchor id='#head' style={{textAlign:'center'}}>Pleasant Grove Media Guide</CustomAnchor>
+            <CustomAnchor id='#head' style={{textAlign:'center'}}>{process.env.REACT_APP_NAME}</CustomAnchor>
             <Wrap spacing='30px' justify='center'>
-                {Object.keys(fields).map((field) => {return (
-                    <Box key={Math.random()} onClick={() => { navigate(fields[field]["route"]) }}>
-                        <SimpleField name={field} image={fields[field]['image']} imgstyle={{height:'200px',width:"300px"}}/>
+                {isFetched && data && data.fields.map((field) => {return (
+                    <Box key={Math.random()} onClick={() => { navigate(field.tag) }}>
+                        <SimpleField name={field.name} image={field.url} imgstyle={{height:'200px',width:"300px"}}/>
                     </Box>)})
                 }
             </Wrap>

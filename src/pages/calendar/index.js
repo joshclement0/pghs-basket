@@ -28,7 +28,7 @@ function MyCalendar(){
     const { setSport } = useContext(routeContext)
     setSport(sport)
 
-    const importgames = useQuery(["pghs",sport,"calendar"], ()=>getData("pghs/"+sport+"/calendar"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const importgames = useQuery(["calendar"], ()=>getData(`${process.env.REACT_APP_TAG}/${sport}/calendar`),{staleTime: 1.8e+6,cacheTime:Infinity})
     useEffect(() => {
         if (importgames.isFetched){
             let allgames = importgames.data

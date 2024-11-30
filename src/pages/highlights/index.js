@@ -14,7 +14,7 @@ function Page(){
     const { setSport } = useContext(routeContext)
     setSport(sport)
    
-    const allLinks = useQuery(["pghs",sport,"Highlights"], ()=>getData("pghs/"+sport+"/Highlights"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const allLinks = useQuery([sport,"Highlights"], ()=>getData(`${process.env.REACT_APP_TAG}/${sport}/Highlights`),{staleTime: 1.8e+6,cacheTime:Infinity})
     useEffect(() => {
         if (allLinks.isFetched && allLinks.data){
             setLinks(allLinks.data)

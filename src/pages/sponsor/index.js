@@ -15,7 +15,7 @@ function SponsorPage(){
     const sport = useParams("sport").sport
     const { setSport } = useContext(routeContext)
 
-    const allAds = useQuery(["pghs",sport,"ads"], ()=>getData("pghs/"+sport+"/ads"),{staleTime: 1.8e+6,cacheTime:Infinity})
+    const allAds = useQuery([sport,"ads"], ()=>getData(`${process.env.REACT_APP_TAG}/${sport}/ads`),{staleTime: 1.8e+6,cacheTime:Infinity})
     
     setSport(sport)
     useEffect(() => {

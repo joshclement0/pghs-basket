@@ -25,8 +25,7 @@ function InnerApp() {
   const { pathname, hash, key } = useLocation();
   const [sport, setSport] = useState();
   const value = { sport, setSport };
-  
-  //let sport = props.sport
+
   useEffect(() => {
     // if not a hash link, scroll to top
     if (hash === '') {
