@@ -43,23 +43,22 @@ function MyCalendar(){
     }
   }, [importgames.isFetched, importgames.data]);
       
-    function add({ date, view }) {
-        // Add class to tiles in month view only
-        if (view === 'month') {
-            // Check if a date React-Calendar wants to check is on the list of dates to add class to
-            if (datesToAddGoldContentTO.find(dDate => isSameDay(dDate, date)) && datesToAddContentTo.find(dDate => isSameDay(dDate, date))){
-                return (<div style={{position:'relative'}}>
-                    <div className="SponsPresent" style={{position:'absolute',right:'24px'}} />
-                    <div className="GamePresent"  style={{position:'absolute',right:'26px'}}/></div>)
-            }
-            if (datesToAddContentTo.find(dDate => isSameDay(dDate, date))) {
-                return (<div className='GamePresent'></div>);
-            }
-            if (datesToAddGoldContentTO.find(dDate => isSameDay(dDate, date))){
-                return (<div className="SponsPresent"/>)
-            }
-            
-        }
+  function add({ date, view }) {
+    // Add class to tiles in month view only
+    if (view === 'month') {
+      // Check if a date React-Calendar wants to check is on the list of dates to add class to
+      if (datesToAddGoldContentTO.find(dDate => isSameDay(dDate, date)) && datesToAddContentTo.find(dDate => isSameDay(dDate, date))){
+        return (<div style={{position:'relative'}}>
+          <div className="SponsPresent" style={{position:'absolute',right:'24px'}} />
+          <div className="GamePresent"  style={{position:'absolute',right:'26px'}}/></div>)
+      }
+      if (datesToAddContentTo.find(dDate => isSameDay(dDate, date))) {
+        return (<div className='GamePresent'></div>);
+      }
+      if (datesToAddGoldContentTO.find(dDate => isSameDay(dDate, date))){
+        return (<div className="SponsPresent"/>)
+      }        
+  }
     }
     function handleChange(e){
         onChange(e)
