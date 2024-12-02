@@ -13,31 +13,35 @@ import { useQuery } from "@tanstack/react-query";
 let datesToAddContentTo = []
 let datesToAddGoldContentTO= []
 function isSameDay(date1, date2) {
-    if(
-        date1.getFullYear() === date2.getFullYear() &&
-        date1.getMonth() === date2.getMonth() &&
-        date1.getDate() === date2.getDate()
-    ) return true
-    else return false
+  if(
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  ) return true
+  else return false
 }
 
 function MyCalendar(){
-    const [value, onChange] = useState(new Date());
-    const [games, setGames] = useState({})
-    const sport = useParams("sport").sport
-    const { setSport } = useContext(routeContext)
-    setSport(sport)
+  const [value, onChange] = useState(new Date());
+  const [games, setGames] = useState({})
+  const sport = useParams("sport").sport
+  const { setSport } = useContext(routeContext)
+  setSport(sport)
 
-    const importgames = useQuery(["calendar"], ()=>getData(`${process.env.REACT_APP_TAG}/${sport}/calendar`),{staleTime: 1.8e+6,cacheTime:Infinity})
-    useEffect(() => {
-        if (importgames.isFetched){
-            let allgames = importgames.data
-            setGames(allgames)
-            datesToAddContentTo = allgames.filter(g=>g.type==='pghs').map(g=>new Date(g.date));
-            datesToAddGoldContentTO= allgames.filter(g=>g.type==='spon').map(g=>new Date(g.date))
-            onChange(new Date())
-        }
-    }, [importgames.isFetched,importgames.data]);
+  const importgames = useQuery(
+    ["calendar"], 
+    ()=>getData(`${process.env.REACT_APP_TAG}/${sport}/calendar`),
+    {staleTime: 1.8e+6,cacheTime:Infinity}
+  )
+  useEffect(() => {
+    if (importgames.isFetched){
+      let allgames = importgames.data
+      setGames(allgames)
+      datesToAddContentTo = allgames.filter(g => g.type==='pghs').map(g => new Date(g.date));
+      datesToAddGoldContentTO= allgames.filter(g => g.type==='spon').map(g => new Date(g.date))
+      onChange(new Date())
+    }
+  }, [importgames.isFetched, importgames.data]);
       
     function add({ date, view }) {
         // Add class to tiles in month view only
