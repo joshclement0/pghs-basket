@@ -27,9 +27,6 @@ function Players (props){
             }
         }, 1500);
     }, [hash]);
-    useEffect(()=>{
-        console.log(sport, data)
-    },[data, sport])
 
     return(<div style={{textAlign: 'center',padding:"20px"}}>
         {isFetched && data && data.length && data.map(team=>(

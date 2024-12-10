@@ -65,15 +65,17 @@ function MyCalendar(){
     }
     return (
         <div>
-            <div style={{position:'absolute',left:"50%",transform:'translate(-50%,10px)'}}>
+            <div style={{justifyContent:'center', display:"flex"}}>
             <Calendar  onChange={handleChange} value={value} tileContent={add}/>
             </div>
-            <div style={{position:'absolute',left:"50%",top:'400px',transform:'translate(-50%,10px)',width: '100%'}}>
+            <div style={{marginTop:'20px', width: '100%'}}>
                 <h1 style={{fontSize:'24px',paddingLeft:'100px'}}>{value.toDateString()}</h1>
                 <div style={{overflow:"auto",height:'270px'}}>
-                    {games.length>0?games.filter((game) => {if (isSameDay(new Date(game.date),value)){return true} else return false}).map((game)=>{ return (
+                    {games.length > 0 ? games
+                      .filter((game) => isSameDay(new Date(game.date), value)? true :false)
+                      .map((game) =>
                         <CalendarItem key={Math.random()} {...game}/>
-                    )}):''}
+                      ):''}
                     <div style={{height:'105px'}} />
                 </div>
             </div>

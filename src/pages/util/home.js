@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import { useNavigate} from "react-router-dom";
 import { Wrap, Box } from "@chakra-ui/react"
 import { getImageURL, getData } from './firbaseconfig'

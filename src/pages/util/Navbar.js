@@ -37,7 +37,22 @@ const Navbar = () => {
     () => getData(`${process.env.REACT_APP_TAG}/${sport}/config`),
     {staleTime: 1.8e+6, cacheTime: Infinity}
   )
-
+  const getIcon = (field)=> {
+    switch (field){
+      case '/players':
+        return FaTshirt;
+      case '/coaches':
+        return FaChalkboardTeacher;
+      case '/calendar':
+        return FaCalendar;
+      case '/support/team':
+        return FaCoins;
+      case '/support/sponsor':
+        return FaCoins;
+      case '/highlights':
+        return FaRegImage;
+    }
+  }
   return (
     <Flex backgroundColor='white' h='10vh' align='center' borderWidth={2} direction='row' p={4} width='100%' position='fixed' top='0px' style={{zIndex:1000}}><>
       
@@ -63,7 +78,7 @@ const Navbar = () => {
               <h2>
                 <AccordionButton>
                   <Box onClick={() => { onClose(); navigate("/"+sport+field.route) }}>
-                      <DrawerButton text={field.name} ></DrawerButton>
+                      <DrawerButton text={field.name} icon={getIcon(field.route)} ></DrawerButton>
                     </Box>
                 </AccordionButton>
               </h2>
