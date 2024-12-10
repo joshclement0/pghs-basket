@@ -13,10 +13,10 @@ function Team (props) {
 
     return(<div style={{textAlign: 'center',padding:"20px"}}>
       <CustomAnchor id={`#${hash}`}> {team.name} </CustomAnchor>
-      {teamImg.isLoading? '':
+      { !team.url || teamImg.isLoading || !teamImg.data ? '' :
           <img src={teamImg.data} alt={team.name+' pic'} style={{width:'100%',marginTop:'8px',marginBottom:'8px',maxWidth:'700px',marginRight:"auto",marginLeft: 'auto'}}/>
       }
-      <Wrap spacing='30px' justify='center'>
+      <Wrap spacing='30px' justify='center' marginTop='12px' marginBottom='24px'>
       {team.items?.map((player) => { 
         if (player.url)
           return <Person 

@@ -45,7 +45,7 @@ function Person(props){
             {playernum >= 0 && <div style={{...styles.number,opacity:isOpen?.3:1}}>{playernum}</div>}
             {isLoading?
             <Image src={defaultImage} style={{width:'100%',opacity:isOpen?.35:1}}/>:
-            <Image src={data} alt={name} style={{width:'100%',opacity:isOpen?.35:1}}/>}
+            <Image src={data} alt={name} style={{width:'100%',opacity:isOpen?.35:1, borderRadius: '8px'}}/>}
             <div style={{fontSize:'3vh',position: 'absolute',bottom: isOpen?'100%':0,left:'50%',
                     transform: isOpen?"translate(-50%, 100px)":"translate(-50%, -20px)",width:"100%",...styles.text,...radialStyle}}>
                 {name}

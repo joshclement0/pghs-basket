@@ -56,7 +56,7 @@ function Home(){
             <Wrap spacing='30px' justify='center'>
                 {fields.map((field) => {return (
                     <Box key={Math.random()} onClick={() => { navigate('/'+sport+field.route) }}>
-                        <SimpleField name={field.name} image={field.image}/>
+                        <SimpleField name={field.name} image={field.image} imgstyle={{height:'200px',width:"300px"}} />
                     </Box>)})
                 }
         </Wrap>

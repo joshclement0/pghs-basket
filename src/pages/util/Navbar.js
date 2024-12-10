@@ -54,10 +54,10 @@ const Navbar = () => {
     }
   }
   return (
-    <Flex backgroundColor='white' h='10vh' align='center' borderWidth={2} direction='row' p={4} width='100%' position='fixed' top='0px' style={{zIndex:1000}}><>
+    <Flex backgroundColor='white' h='6vh' align='center' borderWidth={2} direction='row' p={4} width='100%' position='fixed' top='0px' style={{zIndex:1000}}><>
       
       <Box p={10} pl={0} maxWidth='300px' padding={0} onClick={() => { sport ? navigate("/"+sport) : navigate("") }}>
-        {isFetched && <Logo logo={data.logo} height='8vh'/>}
+        {isFetched && <Logo logo={data.logo} height='4vh'/>}
       </Box>
       <IconButton 
         _hover={{ bg: "gray.50", }} 
